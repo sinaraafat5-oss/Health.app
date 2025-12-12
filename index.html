@@ -1,0 +1,251 @@
+import React, { useState } from 'react';
+
+function App() {
+  const [currentPage, setCurrentPage] = useState('home');
+  const [selectedDisease, setSelectedDisease] = useState(null);
+  const [selectedTopic, setSelectedTopic] = useState(null);
+
+  const diseases = {
+    heart: {
+      name: 'بیماری‌های قلبی',
+      emoji: '❤️',
+      color: 'bg-red-500',
+      definition: 'بیماری‌های قلبی شامل مشکلاتی هستند که قلب و رگ‌های خونی شما را تحت تاثیر قرار می‌دهند. مثل گرفتگی رگ‌ها، ضعف قلب، یا مشکل در ضربان قلب.',
+      symptoms: ['درد یا فشار قفسه سینه', 'تنگی نفس', 'خستگی زیاد', 'تپش قلب نامنظم', 'ورم پاها'],
+      nutrition: ['نمک کم مصرف کنید (زیر یک قاشق چایخوری در روز)', 'روغن زیتون و روغن کانولا استفاده کنید', 'ماهی هفته‌ای 2 بار بخورید', 'سبزیجات و میوه‌های تازه زیاد بخورید', 'از غذاهای چرب و سرخ شده دوری کنید'],
+      exercise: ['پیاده‌روی آرام روزی 30 دقیقه', 'ورزش‌های تنفسی', 'استراحت کافی بین فعالیت‌ها', 'از بلند کردن اجسام سنگین خودداری کنید'],
+      risks: ['سیگار', 'فشار خون بالا', 'دیابت', 'چاقی', 'استرس زیاد', 'کم‌تحرکی']
+    },
+    varicose: {
+      name: 'واریس',
+      emoji: '🦵',
+      color: 'bg-blue-500',
+      definition: 'واریس یعنی رگ‌های سطحی پا بزرگ و پیچ خورده می‌شوند. این رگ‌ها زیر پوست مشخص هستند و گاهی درد دارند.',
+      symptoms: ['رگ‌های برجسته و پیچ خورده روی پا', 'درد و سنگینی پاها', 'خارش اطراف رگ‌ها', 'ورم مچ پا', 'تغییر رنگ پوست پا'],
+      nutrition: ['آب زیاد بنوشید (8 لیوان در روز)', 'فیبر بخورید (سبزی، میوه، غلات)', 'ویتامین C بگیرید (مرکبات، فلفل دلمه‌ای)', 'نمک کم مصرف کنید', 'از الکل و کافئین زیاد دوری کنید'],
+      exercise: ['پیاده‌روی منظم', 'دوچرخه سواری', 'شنا', 'بالا و پایین کردن پاشنه پا', 'از ایستادن طولانی خودداری کنید'],
+      risks: ['ایستادن یا نشستن طولانی مدت', 'چاقی', 'بارداری', 'سن بالا', 'سابقه خانوادگی']
+    },
+    lymph: {
+      name: 'بیماری‌های لنفی',
+      emoji: '💧',
+      color: 'bg-green-500',
+      definition: 'لنف ادم یعنی تجمع مایعات در بدن، معمولاً در دست یا پا. این باعث ورم و سنگینی می‌شود.',
+      symptoms: ['ورم دست یا پا', 'احساس سنگینی', 'سفتی مفاصل', 'پوست کشیده و براق', 'عفونت‌های مکرر پوستی'],
+      nutrition: ['پروتئین کافی بخورید (گوشت، تخم‌مرغ، لبنیات)', 'نمک خیلی کم مصرف کنید', 'از غذاهای فرآوری شده دوری کنید', 'آب کافی بنوشید', 'وزن خود را کنترل کنید'],
+      exercise: ['ورزش‌های ملایم و منظم', 'بالا نگه داشتن عضو ورم کرده', 'ماساژ لنفی (با نظر پزشک)', 'از حرکات شدید خودداری کنید', 'پوشیدن جوراب یا آستین فشاری'],
+      risks: ['جراحی یا تابش درمانی', 'عفونت', 'چاقی', 'کم‌تحرکی', 'آسیب به رگ‌های لنفی']
+    }
+  };
+
+  const faqs = [
+    {
+      q: 'چقدر آب در روز بنوشم؟',
+      a: 'معمولاً 6 تا 8 لیوان آب در روز کافی است. اگر بیماری قلبی دارید، حتماً با پزشک مشورت کنید چون ممکن است نیاز باشد مایعات را محدود کنید.'
+    },
+    {
+      q: 'چه ورزش‌هایی مناسب من است؟',
+      a: 'پیاده‌روی آرام بهترین ورزش است. حتماً قبل از شروع هر برنامه ورزشی با پزشک مشورت کنید.'
+    },
+    {
+      q: 'چه زمانی باید به پزشک مراجعه کنم؟',
+      a: 'اگر درد قفسه سینه، تنگی نفس شدید، ورم ناگهانی، یا هر تغییر ناگهانی در علائم داشتید، فوراً به پزشک مراجعه کنید.'
+    },
+    {
+      q: 'آیا می‌توانم نمک بخورم؟',
+      a: 'نمک را خیلی کم مصرف کنید. سعی کنید کمتر از یک قاشق چایخوری در روز بخورید. از غذاهای آماده و کنسروی که نمک زیاد دارند دوری کنید.'
+    },
+    {
+      q: 'چگونه استرس را کنترل کنم؟',
+      a: 'تنفس عمیق، مدیتیشن، پیاده‌روی، و صحبت با عزیزان می‌تواند کمک کند. خواب کافی هم خیلی مهم است.'
+    }
+  ];
+
+  const renderHome = () => (
+    <div className="space-y-6">
+      <div className="bg-gradient-to-r from-red-500 to-pink-500 text-white p-8 rounded-2xl text-center">
+        <div className="text-6xl mb-4">❤️</div>
+        <h1 className="text-3xl font-bold mb-2">راهنمای سلامت قلب و عروق</h1>
+        <p className="text-lg opacity-90">مراقبت از سلامتی، قدم به قدم</p>
+      </div>
+
+      <div className="grid gap-4">
+        <h2 className="text-xl font-bold text-gray-800 pr-2">بیماری خود را انتخاب کنید:</h2>
+        {Object.entries(diseases).map(([key, disease]) => (
+          <button
+            key={key}
+            onClick={() => {
+              setSelectedDisease(key);
+              setCurrentPage('disease');
+            }}
+            className={`${disease.color} text-white p-6 rounded-xl flex items-center justify-between hover:opacity-90 transition shadow-lg`}
+          >
+            <div className="flex items-center gap-4">
+              <span className="text-5xl">{disease.emoji}</span>
+              <span className="text-2xl font-bold">{disease.name}</span>
+            </div>
+            <span className="text-3xl">←</span>
+          </button>
+        ))}
+      </div>
+
+      <button
+        onClick={() => setCurrentPage('faq')}
+        className="w-full bg-purple-500 text-white p-6 rounded-xl flex items-center justify-between hover:bg-purple-600 transition shadow-lg"
+      >
+        <div className="flex items-center gap-4">
+          <span className="text-5xl">❓</span>
+          <span className="text-2xl font-bold">سوالات متداول</span>
+        </div>
+        <span className="text-3xl">←</span>
+      </button>
+    </div>
+  );
+
+  const renderDisease = () => {
+    if (!selectedDisease) return null;
+    const disease = diseases[selectedDisease];
+
+    const topics = [
+      { id: 'definition', name: 'تعریف بیماری', emoji: '📖' },
+      { id: 'symptoms', name: 'علائم', emoji: '⚠️' },
+      { id: 'nutrition', name: 'تغذیه مناسب', emoji: '🍎' },
+      { id: 'exercise', name: 'ورزش و فعالیت', emoji: '🏃' },
+      { id: 'risks', name: 'عوامل خطر', emoji: '⚡' }
+    ];
+
+    if (selectedTopic) {
+      return (
+        <div className="space-y-6">
+          <button
+            onClick={() => setSelectedTopic(null)}
+            className="flex items-center gap-2 text-gray-600 hover:text-gray-800 text-lg"
+          >
+            ← بازگشت
+          </button>
+
+          <div className={`${disease.color} text-white p-6 rounded-2xl flex items-center gap-4`}>
+            <span className="text-5xl">{disease.emoji}</span>
+            <div>
+              <h2 className="text-2xl font-bold">{disease.name}</h2>
+              <p className="text-lg opacity-90">{topics.find(t => t.id === selectedTopic)?.name}</p>
+            </div>
+          </div>
+
+          <div className="bg-white p-6 rounded-xl shadow-lg">
+            {selectedTopic === 'definition' && (
+              <p className="text-xl leading-relaxed text-gray-800">{disease.definition}</p>
+            )}
+
+            {selectedTopic !== 'definition' && (
+              <ul className="space-y-4">
+                {disease[selectedTopic]?.map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-3 text-lg">
+                    <span className={`${disease.color} text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1 font-bold`}>
+                      {idx + 1}
+                    </span>
+                    <span className="text-gray-800 leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          <div className="bg-yellow-50 border-r-4 border-yellow-400 p-4 rounded-lg">
+            <div className="flex items-start gap-3">
+              <span className="text-2xl">⚠️</span>
+              <p className="text-gray-700">
+                <strong>توجه:</strong> این اطلاعات فقط جنبه آموزشی دارد. حتماً با پزشک خود مشورت کنید.
+              </p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="space-y-6">
+        <button
+          onClick={() => {
+            setSelectedDisease(null);
+            setCurrentPage('home');
+          }}
+          className="flex items-center gap-2 text-gray-600 hover:text-gray-800 text-lg"
+        >
+          ← بازگشت به صفحه اصلی
+        </button>
+
+        <div className={`${disease.color} text-white p-8 rounded-2xl flex items-center gap-4`}>
+          <span className="text-6xl">{disease.emoji}</span>
+          <h2 className="text-3xl font-bold">{disease.name}</h2>
+        </div>
+
+        <div className="grid gap-4">
+          {topics.map((topic) => (
+            <button
+              key={topic.id}
+              onClick={() => setSelectedTopic(topic.id)}
+              className="bg-white p-6 rounded-xl shadow-lg flex items-center justify-between hover:shadow-xl transition"
+            >
+              <div className="flex items-center gap-4">
+                <span className="text-4xl">{topic.emoji}</span>
+                <span className="text-2xl font-bold text-gray-800">{topic.name}</span>
+              </div>
+              <span className="text-3xl text-gray-400">←</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  const renderFAQ = () => (
+    <div className="space-y-6">
+      <button
+        onClick={() => setCurrentPage('home')}
+        className="flex items-center gap-2 text-gray-600 hover:text-gray-800 text-lg"
+      >
+        ← بازگشت به صفحه اصلی
+      </button>
+
+      <div className="bg-purple-500 text-white p-8 rounded-2xl flex items-center gap-4">
+        <span className="text-6xl">❓</span>
+        <h2 className="text-3xl font-bold">سوالات متداول</h2>
+      </div>
+
+      <div className="space-y-4">
+        {faqs.map((faq, idx) => (
+          <div key={idx} className="bg-white p-6 rounded-xl shadow-lg">
+            <h3 className="text-xl font-bold text-purple-600 mb-3 flex items-start gap-3">
+              <span className="bg-purple-100 text-purple-600 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">؟</span>
+              {faq.q}
+            </h3>
+            <p className="text-lg text-gray-700 leading-relaxed pr-11">{faq.a}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="bg-blue-50 border-r-4 border-blue-400 p-6 rounded-lg">
+        <p className="text-gray-700 text-lg leading-relaxed">
+          <strong>یادآوری:</strong> اگر سوال دیگری دارید، حتماً از پزشک یا پرستار خود بپرسید. آنها بهترین منبع اطلاعات برای وضعیت خاص شما هستند.
+        </p>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-purple-50 p-4" dir="rtl">
+      <div className="max-w-2xl mx-auto">
+        {currentPage === 'home' && renderHome()}
+        {currentPage === 'disease' && renderDisease()}
+        {currentPage === 'faq' && renderFAQ()}
+
+        <div className="mt-8 text-center text-gray-500 text-sm">
+          <p>ساخته شده با ❤️ برای سلامتی شما</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
