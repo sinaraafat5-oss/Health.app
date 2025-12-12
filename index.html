@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>راهنمای سلامت قلب و عروق</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Tahoma, Arial, sans-serif;
+      background: linear-gradient(to bottom, #e0f2fe, #fae8ff);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .header {
+      background: linear-gradient(to left, #ef4444, #ec4899);
+      color: white;
+      padding: 40px;
+      border-radius: 20px;
+      text-center;
+      margin-bottom: 30px;
+    }
+    
+    .header .emoji {
+      font-size: 60px;
+      margin-bottom: 15px;
+    }
+    
+    .header h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    
+    .header p {
+      font-size: 16px;
+      opacity: 0.9;
+    }
+    
+    .section-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #1f2937;
+      margin: 20px 0 15px 10px;
+    }
+    
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .card:hover {
+      box-shadow: 0 10px 15px rgba(0,0,0,0.15);
+      transform: translateY(-2px);
+    }
+    
+    .card-content {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .card .emoji {
+      font-size: 50px;
+    }
+    
+    .card .title {
+      font-size: 22px;
+      font-weight: bold;
+    }
+    
+    .card .arrow {
+      font-size: 30px;
+      color: #9ca3af;
+    }
+    
+    .red-card {
+      background: #ef4444;
+      color: white;
+    }
+    
+    .blue-card {
+      background: #3b82f6;
+      color: white;
+    }
+    
+    .green-card {
+      background: #22c55e;
+      color: white;
+    }
+    
+    .purple-card {
+      background: #a855f7;
+      color: white;
+    }
+    
+    .back-btn {
+      background: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      color: #4b5563;
+    }
+    
+    .topic-card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    .topic-card h3 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+    
+    .topic-card ul {
+      list-style: none;
+    }
+    
+    .topic-card li {
+      display: flex;
+      align-items: start;
+      gap: 10px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    
+    .topic-card .number {
+      background: #ef4444;
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+    
+    .warning {
+      background: #fef3c7;
+      border-right: 4px solid #f59e0b;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    
+    .faq-card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    .faq-card h3 {
+      color: #a855f7;
+      font-size: 18px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: start;
+      gap: 10px;
+    }
+    
+    .faq-card .q-icon {
+      background: #f3e8ff;
+      color: #a855f7;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .faq-card p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #374151;
+      padding-right: 40px;
+    }
+    
+    .footer {
+      text-align: center;
+      color: #6b7280;
+      font-size: 14px;
+      margin-top: 40px;
+    }
+    
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- صفحه اصلی -->
+    <div id="homePage">
+      <div class="header">
+        <div class="emoji">❤️</div>
+        <h1>راهنمای سلامت قلب و عروق</h1>
+        <p>مراقبت از سلامتی، قدم به قدم</p>
+      </div>
+      
+      <div class="section-title">بیماری خود را انتخاب کنید:</div>
+      
+      <div class="card red-card" onclick="showDisease('heart')">
+        <div class="card-content">
+          <span class="emoji">❤️</span>
+          <span class="title">بیماری‌های قلبی</span>
+        </div>
+        <span class="arrow">←</span>
+      </div>
+      
+      <div class="card blue-card" onclick="showDisease('varicose')">
+        <div class="card-content">
+          <span class="emoji">🦵</span>
+          <span class="title">واریس</span>
+        </div>
+        <span class="arrow">←</span>
+      </div>
+      
+      <div class="card green-card" onclick="showDisease('lymph')">
+        <div class="card-content">
+          <span class="emoji">💧</span>
+          <span class="title">بیماری‌های لنفی</span>
+        </div>
+        <span class="arrow">←</span>
+      </div>
+      
+      <div class="card purple-card" onclick="showFAQ()">
+        <div class="card-content">
+          <span class="emoji">❓</span>
+          <span class="title">سوالات متداول</span>
+        </div>
+        <span class="arrow">←</span>
+      </div>
+      
+      <div class="footer">ساخته شده با ❤️ برای سلامتی شما</div>
+    </div>
+    
+    <!-- صفحه بیماری -->
+    <div id="diseasePage" class="hidden">
+      <button class="back-btn" onclick="goHome()">← بازگشت به صفحه اصلی</button>
+      <div id="diseaseContent"></div>
+    </div>
+    
+    <!-- صفحه سوالات -->
+    <div id="faqPage" class="hidden">
+      <button class="back-btn" onclick="goHome()">← بازگشت به صفحه اصلی</button>
+      
+      <div class="header purple-card">
+        <div class="emoji">❓</div>
+        <h1>سوالات متداول</h1>
+      </div>
+      
+      <div class="faq-card">
+        <h3>
+          <span class="q-icon">؟</span>
+          <span>چقدر آب در روز بنوشم؟</span>
+        </h3>
+        <p>معمولاً 6 تا 8 لیوان آب در روز کافی است. اگر بیماری قلبی دارید، حتماً با پزشک مشورت کنید چون ممکن است نیاز باشد مایعات را محدود کنید.</p>
+      </div>
+      
+      <div class="faq-card">
+        <h3>
+          <span class="q-icon">؟</span>
+          <span>چه ورزش‌هایی مناسب من است؟</span>
+        </h3>
+        <p>پیاده‌روی آرام بهترین ورزش است. حتماً قبل از شروع هر برنامه ورزشی با پزشک مشورت کنید.</p>
+      </div>
+      
+      <div class="faq-card">
+        <h3>
+          <span class="q-icon">؟</span>
+          <span>چه زمانی باید به پزشک مراجعه کنم؟</span>
+        </h3>
+        <p>اگر درد قفسه سینه، تنگی نفس شدید، ورم ناگهانی، یا هر تغییر ناگهانی در علائم داشتید، فوراً به پزشک مراجعه کنید.</p>
+      </div>
+      
+      <div class="faq-card">
+        <h3>
+          <span class="q-icon">؟</span>
+          <span>آیا می‌توانم نمک بخورم؟</span>
+        </h3>
+        <p>نمک را خیلی کم مصرف کنید. سعی کنید کمتر از یک قاشق چایخوری در روز بخورید. از غذاهای آماده و کنسروی که نمک زیاد دارند دوری کنید.</p>
+      </div>
+      
+      <div class="faq-card">
+        <h3>
+          <span class="q-icon">؟</span>
+          <span>چگونه استرس را کنترل کنم؟</span>
+        </h3>
+        <p>تنفس عمیق، مدیتیشن، پیاده‌روی، و صحبت با عزیزان می‌تواند کمک کند. خواب کافی هم خیلی مهم است.</p>
+      </div>
+      
+      <div class="footer">ساخته شده با ❤️ برای سلامتی شما</div>
+    </div>
+  </div>
+
+  <script>
+    const diseases = {
+      heart: {
+        name: 'بیماری‌های قلبی',
+        emoji: '❤️',
+        color: 'red-card',
+        definition: 'بیماری‌های قلبی شامل مشکلاتی هستند که قلب و رگ‌های خونی شما را تحت تاثیر قرار می‌دهند. مثل گرفتگی رگ‌ها، ضعف قلب، یا مشکل در ضربان قلب.',
+        symptoms: ['درد یا فشار قفسه سینه', 'تنگی نفس', 'خستگی زیاد', 'تپش قلب نامنظم', 'ورم پاها'],
+        nutrition: ['نمک کم مصرف کنید (زیر یک قاشق چایخوری در روز)', 'روغن زیتون و روغن کانولا استفاده کنید', 'ماهی هفته‌ای 2 بار بخورید', 'سبزیجات و میوه‌های تازه زیاد بخورید', 'از غذاهای چرب و سرخ شده دوری کنید'],
+        exercise: ['پیاده‌روی آرام روزی 30 دقیقه', 'ورزش‌های تنفسی', 'استراحت کافی بین فعالیت‌ها', 'از بلند کردن اجسام سنگین خودداری کنید'],
+        risks: ['سیگار', 'فشار خون بالا', 'دیابت', 'چاقی', 'استرس زیاد', 'کم‌تحرکی']
+      },
+      varicose: {
+        name: 'واریس',
+        emoji: '🦵',
+        color: 'blue-card',
+        definition: 'واریس یعنی رگ‌های سطحی پا بزرگ و پیچ خورده می‌شوند. این رگ‌ها زیر پوست مشخص هستند و گاهی درد دارند.',
+        symptoms: ['رگ‌های برجسته و پیچ خورده روی پا', 'درد و سنگینی پاها', 'خارش اطراف رگ‌ها', 'ورم مچ پا', 'تغییر رنگ پوست پا'],
+        nutrition: ['آب زیاد بنوشید (8 لیوان در روز)', 'فیبر بخورید (سبزی، میوه، غلات)', 'ویتامین C بگیرید (مرکبات، فلفل دلمه‌ای)', 'نمک کم مصرف کنید', 'از الکل و کافئین زیاد دوری کنید'],
+        exercise: ['پیاده‌روی منظم', 'دوچرخه سواری', 'شنا', 'بالا و پایین کردن پاشنه پا', 'از ایستادن طولانی خودداری کنید'],
+        risks: ['ایستادن یا نشستن طولانی مدت', 'چاقی', 'بارداری', 'سن بالا', 'سابقه خانوادگی']
+      },
+      lymph: {
+        name: 'بیماری‌های لنفی',
+        emoji: '💧',
+        color: 'green-card',
+        definition: 'لنف ادم یعنی تجمع مایعات در بدن، معمولاً در دست یا پا. این باعث ورم و سنگینی می‌شود.',
+        symptoms: ['ورم دست یا پا', 'احساس سنگینی', 'سفتی مفاصل', 'پوست کشیده و براق', 'عفونت‌های مکرر پوستی'],
+        nutrition: ['پروتئین کافی بخورید (گوشت، تخم‌مرغ، لبنیات)', 'نمک خیلی کم مصرف کنید', 'از غذاهای فرآوری شده دوری کنید', 'آب کافی بنوشید', 'وزن خود را کنترل کنید'],
+        exercise: ['ورزش‌های ملایم و منظم', 'بالا نگه داشتن عضو ورم کرده', 'ماساژ لنفی (با نظر پزشک)', 'از حرکات شدید خودداری کنید', 'پوشیدن جوراب یا آستین فشاری'],
+        risks: ['جراحی یا تابش درمانی', 'عفونت', 'چاقی', 'کم‌تحرکی', 'آسیب به رگ‌های لنفی']
+      }
+    };
+    
+    function goHome() {
+      document.getElementById('homePage').classList.remove('hidden');
+      document.getElementById('diseasePage').classList.add('hidden');
+      document.getElementById('faqPage').classList.add('hidden');
+      window.scrollTo(0, 0);
+    }
+    
+    function showFAQ() {
+      document.getElementById('homePage').classList.add('hidden');
+      document.getElementById('diseasePage').classList.add('hidden');
+      document.getElementById('faqPage').classList.remove('hidden');
+      window.scrollTo(0, 0);
+    }
+    
+    function showDisease(diseaseId) {
+      const disease = diseases[diseaseId];
+      const content = document.getElementById('diseaseContent');
+      
+      content.innerHTML = `
+        <div class="header ${disease.color}">
+          <div class="emoji">${disease.emoji}</div>
+          <h1>${disease.name}</h1>
+        </div>
+        
+        <div class="topic-card">
+          <h3>📖 تعریف بیماری</h3>
+          <p style="font-size: 18px; line-height: 1.8;">${disease.definition}</p>
+        </div>
+        
+        <div class="topic-card">
+          <h3>⚠️ علائم</h3>
+          <ul>
+            ${disease.symptoms.map((s, i) => `
+              <li>
+                <span class="number">${i + 1}</span>
+                <span>${s}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+        
+        <div class="topic-card">
+          <h3>🍎 تغذیه مناسب</h3>
+          <ul>
+            ${disease.nutrition.map((n, i) => `
+              <li>
+                <span class="number">${i + 1}</span>
+                <span>${n}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+        
+        <div class="topic-card">
+          <h3>🏃 ورزش و فعالیت</h3>
+          <ul>
+            ${disease.exercise.map((e, i) => `
+              <li>
+                <span class="number">${i + 1}</span>
+                <span>${e}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+        
+        <div class="topic-card">
+          <h3>⚡ عوامل خطر</h3>
+          <ul>
+            ${disease.risks.map((r, i) => `
+              <li>
+                <span class="number">${i + 1}</span>
+                <span>${r}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+        
+        <div class="warning">
+          <p><strong>⚠️ توجه:</strong> این اطلاعات فقط جنبه آموزشی دارد. حتماً با پزشک خود مشورت کنید.</p>
+        </div>
+        
+        <div class="footer">ساخته شده با ❤️ برای سلامتی شما</div>
+      `;
+      
+      document.getElementById('homePage').classList.add('hidden');
+      document.getElementById('diseasePage').classList.remove('hidden');
+      document.getElementById('faqPage').classList.add('hidden');
+      window.scrollTo(0, 0);
+    }
+  </script>
+</body>
+</html>
